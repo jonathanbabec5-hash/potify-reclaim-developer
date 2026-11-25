@@ -1,0 +1,2 @@
+const placements=new Set(['hero','nav','how','fees','footer','mobile','plan']);
+export function GET(request:Request){const from=new URL(request.url).searchParams.get('from')??'hero';const service=new URL('https://potify-project-reclaim.replit.app/');service.searchParams.set('utm_source','potify_launch');service.searchParams.set('utm_medium','website');service.searchParams.set('utm_campaign','reclaim_early_access');service.searchParams.set('utm_content',placements.has(from)?from:'hero');return Response.redirect(service.toString(),302);}

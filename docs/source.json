@@ -1,0 +1,7 @@
+{
+  "project": "Project Reclaim",
+  "kind": "Recovered service handoff",
+  "source": "potify-reclaim at `ea60921eab412290ddbcb8bc7416b30a1985f2a7`. Official service redirect and existing regression tests. Added integer-lamport illustration. Actual fee rounding and network costs need confirmation against the original Replit builder.",
+  "scope": "The transaction builder, Solflare review and original Replit server remain outside this package. No wallet action is part of the example.",
+  "prepared": "2026-11-25"
+}
