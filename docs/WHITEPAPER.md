@@ -1,7 +1,7 @@
 # Project Reclaim
 ## Whitepaper · public developer edition
 
-**November 25, 2026 · Recovered service handoff**
+**November 25, 2026 · Original wallet engine and verification source**
 
 ### Goal and audience
 
@@ -9,15 +9,15 @@ Help wallet owners understand the documented rent-recovery fee and preview befor
 
 ### Design and implementation
 
-The source route forwards to the official service with a bounded set of placement tags. The public example expresses the fixed 18% fee in integer units. Quote the gross recoverable rent, 18% service fee, network cost and net separately. The synthetic calculation is explanatory and cannot identify closable accounts.
+The original wallet engine scans token accounts, constructs a reviewable quote, handles wallet-added assertions and verifies submitted transaction contents. The service handoff and integer fee illustration are separate from the original policy package. Quote the gross recoverable rent, 18% service fee, network cost and net separately. The synthetic calculation is explanatory and cannot identify closable accounts.
 
 ### What a contributor can establish
 
-Two upstream redirect tests and one new fee arithmetic test passed. No account scan, burn, signature, transfer or on-chain reclaim was attempted. A marketing page and a successful redirect cannot confirm wallet compatibility, ownership, support review or a mainnet reclaim. Review the real builder independently.
+The original wallet and verification sources passed 58 offline engine tests. The independent fee illustration and two service redirect tests also passed. No wallet connection or on-chain action was performed. A marketing page and a successful redirect cannot confirm wallet compatibility, ownership, support review or a mainnet reclaim. Review the real builder independently.
 
 ### Evidence and outstanding work
 
-The transaction builder, Solflare review and original Replit server remain outside this package. No wallet action is part of the example. The next acceptance case is concrete. Verify redirect behavior and a sample gross, service fee and net before any real wallet interaction.
+Public engine and verification source recovered from the original private repository. Mainnet operation, support review and live wallet compatibility remain unverified. No transaction or wallet action was performed. The next acceptance case is concrete. Verify redirect behavior and a sample gross, service fee and net before any real wallet interaction.
 
 ### Place in POTIFY
 
