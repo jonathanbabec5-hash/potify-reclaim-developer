@@ -1,0 +1,22 @@
+name: POTIFY Roots Agent Gateway
+on:
+  push:
+    paths: ['agent-gateway/**', 'engine/**', 'packages/reclaim-policy/**', 'package*.json', '.github/workflows/potify-roots-agent.yml']
+  pull_request:
+    paths: ['agent-gateway/**', 'engine/**', 'packages/reclaim-policy/**', 'package*.json', '.github/workflows/potify-roots-agent.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --legacy-peer-deps
+      - run: npm run test:engine
+      - run: npm ci
+        working-directory: agent-gateway
+      - run: npm test
+        working-directory: agent-gateway
