@@ -1,37 +1,50 @@
-# Project Reclaim
+# POTIFY Roots Agent Gateway
 
-[Complete repository directory tree](docs/DIRECTORY.md)
+[Complete tracked tree](docs/DIRECTORY.md) · [Whitepaper](docs/WHITEPAPER.md) · [Marketing and sales plan](docs/MARKETING.md) · [Source revisions](docs/SOURCES.md)
 
-**Original wallet engine and verification source.** Help wallet owners understand the documented rent-recovery fee and preview before trying the service.
+An agent supplies a public Solana address to receive a read-only estimate of rent in eligible empty token accounts. The HTTP and MCP summary both report gross lamports before fees. See the source revision notes for the exact Reclaim scanner behind the estimate.
 
-### Setup and usage
+## Run locally
 
-Node.js 24 and npm. Run the install command before running the build checks. Run npm ci before npm run test:engine. The quote example itself uses only Node.js.
-
-```sh
-node examples/quote.mjs
-```
-
-Inspect the fee example. 
-
-### Developer entry points
-
-The original wallet engine scans token accounts, constructs a reviewable quote, handles wallet-added assertions and verifies submitted transaction contents. The service handoff and integer fee illustration are separate from the original policy package. Explore `app/`, `engine/`, `examples/`, `packages/`, `src/`, `tests/` in the full tree.
-
-### Verification
-
-The original wallet and verification sources passed 58 offline engine tests. The independent fee illustration and two service redirect tests also passed. No wallet connection or on-chain action was performed.
+Use Node.js 24 and npm. From the repository root:
 
 ```sh
-node --test tests/project.test.mjs
-node --test tests/service-route.test.mjs
-npm run test:engine
+npm ci
+npm test
+npm start
 ```
 
-### Release scope
+The server binds to 127.0.0.1:4021. Offline tests use synthetic inputs and a local HTTP server. Live preview calls require a reachable Solana RPC. Payments default to disabled.
 
-Public engine and verification source recovered from the original private repository. Mainnet operation, support review and live wallet compatibility remain unverified. No transaction or wallet action was performed. potify-reclaim at `ea60921eab412290ddbcb8bc7416b30a1985f2a7`. Official service redirect and existing regression tests. Added integer-lamport illustration. Actual fee rounding and network costs need confirmation against the original Replit builder. Original wallet engine, signature verification, assertion policy, review and offline tests recovered from potify-project-reclaim main at 5552c730cf5479c71a03220f6a83d3746b71746b.
+## Use the REST endpoint
 
-[Technical whitepaper](docs/WHITEPAPER.md) · [Marketing and sales plan](docs/MARKETING.md) · [Dated developer log](docs/BUILD-LOG.md)
+```bash
+curl -X POST http://127.0.0.1:4021/api/v1/reclaim-preview \
+  -H 'Content-Type: application/json' \
+  -d '{"wallet":"8Z5EqQdqR7efqXEFuHiZnepWPX9PPcWMoCujrctW3cdS"}'
+```
 
-Existing asset and code terms remain applicable. Public access to a recording, illustration, brand or manuscript does not itself grant commercial reuse rights.
+The example takes a public address. The response includes `candidateCount`, `estimatedGrossLamports`, a timestamp, explicit limitations, and POTIFY/Reclaim links. The summary deliberately omits individual account details. Different RPC reads can occur at different slots. No candidate is proof of closeability; recheck the source and obtain the wallet owner's approval before any real action.
+
+## Use the MCP tool
+
+Connect an MCP client with Streamable HTTP to `http://127.0.0.1:4021/mcp` and call `potify_reclaim_preview` with `{"wallet":"<public-address>"}`. The server uses a stateless JSON transport. Tests exercise a real SDK client against the local server.
+
+## Payment experiment
+
+`POST /api/v1/reclaim-details` is disabled by default. Setting `PAYMENTS_MODE=devnet` and `DEVNET_PAYMENT_RECIPIENT=<public-devnet-address>` enables an **x402 devnet** challenge at a provisional test price of $0.002 for that endpoint. It uses mainnet RPC only for read-only source data and devnet for the payment experiment. It is not configured to accept real USDC, and the challenge test does not prove a successful settlement. Never add a seed phrase or private key.
+
+## Before a public or paid launch
+
+See [payments](docs/PAYMENTS.md), [whitepaper](docs/WHITEPAPER.md), and [discovery plan](docs/MARKETING.md). Production needs a separately reviewed deployment, durable rate and abuse limits, bounded RPC workloads and suitable provider capacity, proper MCP origin controls, monitored failures, verified USDC account and key recovery, payment replay/idempotency and end-to-end settlement tests, public documentation, and actual marketplace or registry listings. A public Solana RPC and in-memory limiter alone are not a production service.
+
+## Publish a fresh GitHub repository
+
+From a new directory containing this edition’s files, use a GitHub account that can create repositories under the intended owner.
+
+```sh
+git init -b main
+git add .
+git commit -m "Publish standalone POTIFY Roots Agent Gateway"
+gh repo create jonathanbabec5-hash/potify-roots-agent-gateway --public --source=. --remote=origin --push
+```

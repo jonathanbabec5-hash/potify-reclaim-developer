@@ -1,46 +1,24 @@
-# Repository tree
+# Complete tracked tree
+
+Paths are relative to the repository root.
 
 ```text
-potify-reclaim/
-├── app/
-│   └── reclaim/
-│       └── route.ts
-├── docs/
-│   ├── BUILD-LOG.md
-│   ├── DIRECTORY.md
-│   ├── MARKETING.md
-│   ├── WHITEPAPER.md
-│   └── source.json
-├── engine/
-│   ├── client/
-│   │   ├── lighthouse-headroom.test.ts
-│   │   ├── reclaim-review.test.ts
-│   │   ├── reclaim-review.ts
-│   │   ├── transaction-limits.ts
-│   │   ├── transaction-status.ts
-│   │   ├── wallet-compatibility.test.ts
-│   │   ├── wallet-signing.ts
-│   │   ├── wallet.test.ts
-│   │   └── wallet.ts
-│   ├── server/
-│   │   ├── reclaim-verification.test.ts
-│   │   └── reclaim-verification.ts
-│   └── test-support/
-│       └── reclaim-rpc-fixtures.ts
-├── examples/
-│   └── quote.mjs
-├── packages/
-│   └── reclaim-policy/
-│       ├── src/
-│       │   └── index.ts
-│       └── package.json
-├── src/
-│   └── quote.mjs
-├── tests/
-│   ├── project.test.mjs
-│   └── service-route.test.mjs
-├── .gitignore
-├── README.md
-├── package-lock.json
-└── package.json
+.env.example
+.github/workflows/test.yml
+.gitignore
+README.md
+docs/DIRECTORY.md
+docs/MARKETING.md
+docs/PAYMENTS.md
+docs/SOURCES.md
+docs/WHITEPAPER.md
+package-lock.json
+package.json
+src/app.ts
+src/devnet-payment.ts
+src/inspection.ts
+src/main.ts
+src/reclaim-scanner.ts
+test/gateway.test.ts
+test/scanner.test.ts
 ```

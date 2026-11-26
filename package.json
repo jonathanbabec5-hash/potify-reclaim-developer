@@ -1,19 +1,25 @@
 {
-  "name": "potify-reclaim",
+  "name": "potify-roots-agent-gateway",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "description": "Read-only POTIFY Reclaim data for AI agents",
   "scripts": {
-    "check:public": "node --test tests/project.test.mjs && node --test tests/service-route.test.mjs && npm run test:engine",
-    "test:engine": "node --import tsx --test engine/client/reclaim-review.test.ts engine/client/wallet.test.ts engine/client/lighthouse-headroom.test.ts engine/client/wallet-compatibility.test.ts engine/server/reclaim-verification.test.ts"
+    "start": "node --import tsx src/main.ts",
+    "test": "node --import tsx --test test/*.test.ts"
   },
   "dependencies": {
-    "@workspace/reclaim-policy": "file:packages/reclaim-policy",
-    "@solana/spl-token": "^0.4.15",
-    "@solana/web3.js": "^1.99.0",
-    "bs58": "^6.0.0",
-    "buffer": "^6.0.3"
+    "@modelcontextprotocol/sdk": "^1.25.0",
+    "@solana/web3.js": "^1.98.4",
+    "@x402/core": "^2.32.0",
+    "@x402/express": "^2.32.0",
+    "@x402/svm": "^2.32.0",
+    "express": "^5.1.0",
+    "tsx": "^4.23.15",
+    "zod": "^3.25.76",
+    "@solana/spl-token": "0.4.15"
   },
-  "devDependencies": {
-    "tsx": "4.23.15"
+  "engines": {
+    "node": ">=24"
   }
 }

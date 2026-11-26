@@ -1,26 +1,26 @@
-# Project Reclaim
-## Whitepaper · public developer edition
+# POTIFY Roots Agent Gateway: Technical Paper
 
-**November 25, 2026 · Original wallet engine and verification source**
+## Goal
 
-### Goal and audience
+Make a useful, verifiable part of POTIFY Project Reclaim accessible to software and AI agents: a read-only preview of candidate token accounts and their gross locked lamports. This is a separate POTIFY project connected to Reclaim, not a new token or a claim that the entire ecosystem is complete.
 
-Help wallet owners understand the documented rent-recovery fee and preview before trying the service. The immediate audience is solana wallet educators and users with old token accounts.
+## Data and behavior
 
-### Design and implementation
+The existing Reclaim scanner requests SPL and Token-2022 accounts from a Solana RPC and applies its source rules for account state, authority and supported extensions. It currently excludes wrapped SOL, frozen accounts, unsupported extensions, and other conditions defined in the bundled read-only scanner. The gateway reports counts and gross amounts, with a maximum of 100 candidate details in the experimental detail route. Numeric lamports are strings to avoid precision loss. Source and timestamp accompany each result; the snapshot can span slots.
 
-The original wallet engine scans token accounts, constructs a reviewable quote, handles wallet-added assertions and verifies submitted transaction contents. The service handoff and integer fee illustration are separate from the original policy package. Quote the gross recoverable rent, 18% service fee, network cost and net separately. The synthetic calculation is explanatory and cannot identify closable accounts.
+An HTTP API and a stateless MCP endpoint expose the free summary. They accept one public address, never private keys. The prototype binds to loopback and includes a small per-process rate limit; neither replaces public origin enforcement, durable rate limiting or provider-side controls. It performs no signing, burn, close, transfer, wallet connection or changes to on-chain state.
 
-### What a contributor can establish
+## Commercial model
 
-The original wallet and verification sources passed 58 offline engine tests. The independent fee illustration and two service redirect tests also passed. No wallet connection or on-chain action was performed. A marketing page and a successful redirect cannot confirm wallet compatibility, ownership, support review or a mainnet reclaim. Review the real builder independently.
+Free summaries are intended to help agents discover the service. Detailed candidate results are reserved for a possible paid route. The included x402 integration accepts only a devnet test challenge; $0.002 is a development assumption, not a live offer. Fee economics, client interoperability, full settlement and replay protection must be independently validated before sale. Gross estimated account value is not a net quote; the separate Reclaim product has its own fee and security review.
 
-### Evidence and outstanding work
+## Boundaries and open work
 
-Public engine and verification source recovered from the original private repository. Mainnet operation, support review and live wallet compatibility remain unverified. No transaction or wallet action was performed. The next acceptance case is concrete. Verify redirect behavior and a sample gross, service fee and net before any real wallet interaction.
+No launch, payment, customer, integration with Potify ID or Green Light Pay, direct wallet recovery, or exchange listing is implied. A live service needs bounded scan work for large wallets; reliable RPC; abuse protection; MCP origin security; privacy-safe observability; resilient idempotency; accurate fee estimates and record freshness; live authorization checks; and clear customer support. Use the existing mainnet wallet only after independent owner recovery is verified.
 
-### Place in POTIFY
+## Sources
 
-Count only reconciled service fees from confirmed real reclaims after wallet review and source parity. The marketing plan gives the test window and the evidence for a commercial outcome.
-
-[Source provenance](source.json) · [Build log](BUILD-LOG.md) · [Marketing plan](MARKETING.md)
+- [Bundled scanner](../src/reclaim-scanner.ts) and [upstream source revisions](SOURCES.md).
+- Solana x402: https://solana.com/developers/docs/payments/agentic-payments/x402
+- MCP Registry requirements: https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/server-json/official-registry-requirements.md
+- Solana RPC limits: https://solana.com/developers/docs/rpc

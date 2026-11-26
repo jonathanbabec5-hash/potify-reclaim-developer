@@ -1,5 +1,5 @@
 import { Connection, PublicKey } from '@solana/web3.js';
-import { assertRpcNetwork, scanWallet } from '../../engine/client/wallet.ts';
+import { assertRpcNetwork, scanWallet } from './reclaim-scanner.ts';
 
 export class InvalidWalletError extends Error {}
 export type Candidate = {
