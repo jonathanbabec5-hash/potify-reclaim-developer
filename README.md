@@ -2,6 +2,14 @@
 
 [Complete repository directory tree](docs/DIRECTORY.md)
 
+## The most useful number is what remains
+
+‘Recoverable’ can sound like money already in your pocket. The useful work in Project Reclaim happens before a signature: what could be recovered, what comes out of it and what would actually remain? A reader should be able to check that arithmetic on paper.
+
+The [integer illustration](src/quote.mjs) gives a small example: 2,000,000 lamports gross, 360,000 for the 18% service fee, and 5,000 assumed network cost leave 1,635,000. The [offline tests](tests/project.test.mjs) and the recovered engine are separate evidence. The recorded 58 engine tests are not a completed live-wallet claim.
+
+Read a fictional quote and identify the gross, service fee, network cost and estimated net. Flag the first label that could be mistaken for the amount received. Reclaim is POTIFY-developed, in Phantom early access. Review the net before signing; optional burns are irreversible. Stop on wallet warnings.
+
 **Original wallet engine and verification source.** Help wallet owners understand the documented rent-recovery fee and preview before trying the service.
 
 ### Setup and usage
