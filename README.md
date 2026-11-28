@@ -1,5 +1,13 @@
 # Project Reclaim
 
+## Find your way in
+
+| If you are… | Start here | Try this |
+| --- | --- | --- |
+| A wallet owner | [Inspect the fee example](src/quote.mjs) | Separate estimated gross, service fee, network cost and net. |
+| A developer | [Run the offline example](#setup-and-usage) | Follow the arithmetic without connecting a wallet. |
+| An agent builder | [Explore Roots Agent Gateway](https://github.com/jonathanbabec5-hash/potify-roots-agent-gateway) | See the separate read-only preview interface and its limits. |
+
 [Complete repository directory tree](docs/DIRECTORY.md)
 
 ## The most useful number is what remains
